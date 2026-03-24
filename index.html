@@ -256,6 +256,7 @@ mostrarResultado();
 }
 
 function mostrarResultado(){
+registrarQuiz();
 trocarTela("quiz","resultado");
 
 pontuacao.innerText="Pontuação: "+score;
@@ -336,6 +337,36 @@ addDoc(collection(db, "acessos"), {
   data: new Date(),
   pagina: "inicio"
 });
+   async function registrarQuiz(){
+
+try{
+
+const { initializeApp } = await import("https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js");
+
+const { getFirestore, collection, addDoc } = await import("https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js");
+
+const firebaseConfig = {
+apiKey: "AIzaSyBgoXXYthJuiDbo2EchLp4uYOV3g8xWI-c",
+authDomain: "prato-consciente-a80bf.firebaseapp.com",
+projectId: "prato-consciente-a80bf",
+storageBucket: "prato-consciente-a80bf.firebasestorage.app",
+messagingSenderId: "317212713518",
+appId: "1:317212713518:web:268bb4b9d3decd933235bf"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+await addDoc(collection(db,"quiz_finalizados"),{
+data:new Date()
+});
+
+}catch(e){
+console.log("erro",e);
+}
+
+}
 </script>
 
 </body>
