@@ -334,16 +334,25 @@ data:new Date()
 });
 
 // função chamada quando termina quiz
-window.registrarQuiz = function(){
+window.registrarQuiz = async function(){
 
-addDoc(collection(db,"quiz_finalizados"),{
+try{
+
+await addDoc(collection(db,"quiz_finalizados"),{
 data:new Date()
 });
+
+console.log("quiz registrado");
+
+}catch(e){
+
+console.log("erro ao registrar quiz", e);
+
+}
 
 };
 
 </script>
-
 
 </body>
 </html>
